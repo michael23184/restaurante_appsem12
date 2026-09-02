@@ -1,18 +1,15 @@
-import datetime
-
 class Venta:
-    def __init__(self, usuario, producto, cantidad):
-        self.usuario = usuario
-        self.producto = producto
+    def __init__(self, usuario_id: str, producto_codigo: str, cantidad: int) -> None:
+        self.usuario_id = usuario_id
+        self.producto_codigo = producto_codigo
         self.cantidad = cantidad
-        self.fecha = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.total = producto.precio * cantidad
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
-            "usuario": self.usuario.nombre,
-            "producto": self.producto.nombre,
-            "cantidad": self.cantidad,
-            "fecha": self.fecha,
-            "total": self.total
+            "usuario_id": self.usuario_id,
+            "producto_codigo": self.producto_codigo,
+            "cantidad": self.cantidad
         }
+
+    def __str__(self) -> str:
+        return f"Venta: Usuario {self.usuario_id}, Producto {self.producto_codigo}, Cantidad {self.cantidad}"
