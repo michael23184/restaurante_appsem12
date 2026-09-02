@@ -3,77 +3,65 @@
 **Carrera:** TIC - Segundo semestre  
 **Asignatura:** Programación Orientada a Objetos - Semana 10  
 
-## Descripción
-Este proyecto implementa un sistema de restaurante en Python utilizando Programación Orientada a Objetos.  
-La mejora principal consiste en incorporar **persistencia de productos** mediante un archivo JSON.
+# Restaurante App
 
-## Estructura del proyecto
-restaurante_poo10/
-├── datos/
-│   └── productos.json
-├── modelos/
-│   ├── init.py
-│   ├── producto.py
-│   └── usuario.py
-├── servicios/
-│   ├── init.py
-│   ├── archivo_servicio.py
-│   └── restaurante.py
-├── main.py
-└── README.md
+## 📌 Descripción 
+Sistema de gestión de productos, usuarios y ventas para un restaurante, con persistencia en archivos JSON y optimización mediante colecciones auxiliares.
 
-- **datos/**: contiene el archivo `productos.json` donde se guardan los productos.  
-- **modelos/**: define las clases principales (`Producto`, `Usuario`).  
-- **servicios/**: maneja la lógica de persistencia (`archivo_servicio.py`) y la gestión de productos (`restaurante.py`).  
-- **main.py**: archivo principal que ejecuta el menú interactivo.  
-- **README.md**: documentación del proyecto.  
+---
 
-## Ejecución
-1. Abrir la carpeta del proyecto en VS Code.  
-2. Ejecutar el archivo principal:  
-   ```bash
-   python main.py
-Seleccionar una opción del menú para registrar, listar, buscar, actualizar o eliminar productos.
-Ejemplo de uso.
-Registrar producto:
-Codigo: P001
-Nombre: Hamburguesa
-Precio: 5.50
-El producto se guarda en datos/productos.json y se mantiene al reiniciar el programa.
+## 📌 Semana 11
+- Implementación inicial usando **listas** para almacenar productos, usuarios y ventas.
+- Métodos básicos: registrar, listar, buscar, actualizar y eliminar.
+- Persistencia en JSON mediante `archivo_servicio.py`.
 
-Al listar productos, se muestra:
-P001 - Hamburguesa ($5.5)
-Validaciones:
-El código y el nombre no pueden estar vacíos.
+---
 
-El precio debe ser mayor a 0.
+## 📌 Semana 12
+Se optimizó el sistema con **diccionarios auxiliares** para mejorar la eficiencia en las búsquedas:
 
-No se permite registrar dos productos con el mismo código.
-Notas.
-El archivo productos.json se crea automáticamente al registrar el primer producto.
+- **Productos**
+  - Lista principal: `self.productos`
+  - Índice auxiliar: `self.productos_por_codigo`
+  - Búsqueda rápida por código.
 
-Se recomienda ejecutar siempre desde la raíz del proyecto.
+- **Usuarios**
+  - Lista principal: `self.usuarios`
+  - Índice auxiliar: `self.usuarios_por_id`
+  - Búsqueda rápida por identificación.
 
-El repositorio incluye .gitignore para mantener limpio el control de versiones.
-# Mejoras Semana 11
+- **Ventas**
+  - Lista principal: `self.ventas`
+  - Índice auxiliar: `self.ventas_por_usuario`
+  - Consultas rápidas de ventas por cliente.
+  - Actualización automática de stock al registrar una venta.
 
-En la Semana 11 se amplió el sistema con nuevas funcionalidades:
+- **Reconstrucción de índices**
+  - Al cargar datos desde JSON, se reconstruyen los diccionarios auxiliares para mantener la eficiencia.
 
-- **Clase Venta**: permite registrar ventas con usuario, producto, cantidad, fecha y total.  
-- **Persistencia de ventas**: las ventas se guardan en `datos/ventas.json`.  
-- **Validación de stock**: no se permite vender más productos de los que hay disponibles.  
-- **Consulta de ventas por usuario**: se pueden listar todas las ventas realizadas por un usuario específico.  
-- **Archivos JSON adicionales**: `usuarios.json` y `ventas.json` para persistencia de datos.  
+---
 
-## Ejemplo de ejecución Semana 11
-- Registrar usuario y producto.  
-- Realizar una venta:  
-Usuario: Michael
-Producto: Pizza
-Cantidad: 2
-Resultado:  
-✅ Venta realizada: 2 Pizza a Michael
+## 📌 Archivos del proyecto
+- `modelos/producto.py` → Clase Producto con validaciones y conversión a diccionario.
+- `modelos/usuario.py` → Clase Usuario con atributos básicos y conversión a diccionario.
+- `modelos/venta.py` → Clase Venta con referencias por ID y conversión a diccionario.
+- `servicios/restaurante.py` → Lógica principal con colecciones optimizadas.
+- `servicios/archivo_servicio.py` → Lectura y escritura de JSON.
+- `main.py` → Menú interactivo para pruebas.
+- `productos.json`, `usuarios.json`, `ventas.json` → Archivos de persistencia.
 
-- Consultar ventas por usuario: 
-📊 Ventas de Michael:
-{'usuario': 'Michael', 'producto': 'Pizza', 'cantidad': 2, 'fecha': '2026-08-25 19:30:00', 'total': 10.0}
+---
+
+## 📌 Pruebas mínimas
+1. Registrar producto, usuario y venta.
+2. Buscar producto por código.
+3. Buscar usuario por identificación.
+4. Consultar ventas de un usuario.
+5. Verificar actualización de stock.
+6. Cerrar y volver a abrir el programa para comprobar reconstrucción de índices.
+
+---
+
+## 📌 Ejecución
+```bash
+python main.py
